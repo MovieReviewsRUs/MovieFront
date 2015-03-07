@@ -29,7 +29,7 @@ App.render_all_movies = function(movies){
     html += "<div id='movie-" + movie.id + "'>";
     html += '<article>';
     html += "<h2>" + movie.title.link(App.url +'/movies/' + movie.id) + "</h2>";
-    html += '<li> Total Gross: ' + movie.total_gross + "</li>";
+    html += '<li> Total Gross: $' + movie.total_gross + "</li>";
     html += '<li> MPAA Rating: ' + movie.mpaa_rating + "</li>";
     html += '<li> Release Date: ' + movie.release_date + "</li>";
     html += '<li> Description: ' + movie.description + "</li>";
@@ -61,9 +61,34 @@ App.show_a_movie = function(movie){
   });
 };
 
+App.submitMovie = function(event){
+  //if(event.preventDefault) event.preventDefault();
+  $.ajax({
+    url: App.url + '/movies',
+    type: 'POST',
+    dataType: 'JSON',
+    data: {
+      movie: {
+        title: $('#movie-title').val(),
+        total_gross: $('#total-gross').val(),
+        release_date: $('#release-date').val(),
+        mpaa_rating: $('#rating').val(),
+        description: $('#description').val()
+      }
+    }
+  }).done(function(data){
+    trace(data);
+  }).fail(function(jqXHR, textStatus, errorThrown){
+    trace(jqXHR, textStatus, errorThrown);
+  });
+};
+
 
 $(document).ready(function(){
-  trace('hello world');
   App.getMovies();
-  App.show_a_movie()
+  App.show_a_movie();
+  var $movieForm = $('form#new-movie-form');
+  $movieForm.on('submit', function(event){
+    App.submitMovie(event);
+  });
 });
