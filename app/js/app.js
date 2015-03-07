@@ -23,12 +23,13 @@ App.getMovies = function(){
 };
 
 App.render_all_movies = function(movies){
-  var html = '';
-  html += "<ul>";
+  var html = "<ul>";
   movies.forEach(function(movie){
+    $('.dropdown-menu').append('<li><a href="#">'+ movie.title +'</a></li><li class="divider"></li>');
+
     html += "<div id='movie-" + movie.id + "'>";
     html += '<article>';
-    html += "<h2>" + movie.title.link(App.url +'/movies/' + movie.id) + "</h2>";
+    html += "<h2>" + movie.title + "</h2>";
     html += '<li> Total Gross: $' + movie.total_gross + "</li>";
     html += '<li> MPAA Rating: ' + movie.mpaa_rating + "</li>";
     html += '<li> Release Date: ' + movie.release_date + "</li>";
@@ -44,6 +45,7 @@ App.render_all_movies = function(movies){
     };
      html += '</article>'
      html += "</ul>";
+     html += '<hr>'
      //html += "<input type='submit' id='delete-" + movie.id + "' value='Add Movie' />";
      html += '</div>';
   });
@@ -62,7 +64,7 @@ App.show_a_movie = function(movie){
 };
 
 App.submitMovie = function(event){
-  //if(event.preventDefault) event.preventDefault();
+  if(event.preventDefault) event.preventDefault();
   $.ajax({
     url: App.url + '/movies',
     type: 'POST',
@@ -87,6 +89,10 @@ App.submitMovie = function(event){
 $(document).ready(function(){
   App.getMovies();
   App.show_a_movie();
+  var $selectedMovie = $('h2#theMovie');
+  $selectedMovie.on('click', function(event){
+    alert("Movie clicked");
+  });
   var $movieForm = $('form#new-movie-form');
   $movieForm.on('submit', function(event){
     App.submitMovie(event);
