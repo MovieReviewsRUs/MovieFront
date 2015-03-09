@@ -111,8 +111,8 @@ App.submitReview = function(event){
   var queryString = window.location.search;
   queryString = queryString.substring(1);
   $.ajax({
-    url: App.url + "/movies/" + queryString + "/reviews",
-    // url: App.url + '/show.html/' + queryString,
+    // url: App.url + '/movies/' + queryString,
+    url: "http://localhost:3000/movies",
     type: 'POST',
     dataType: 'JSON',
     data: {
@@ -123,8 +123,8 @@ App.submitReview = function(event){
       }
     }
   }).done(function(data){
-    trace(data);
     debugger
+    trace(data);
     window.location.href = '/';
   }).fail(function(jqXHR, textStatus, errorThrown){
     trace(jqXHR, textStatus, errorThrown);
