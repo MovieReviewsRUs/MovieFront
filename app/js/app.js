@@ -63,7 +63,7 @@ App.show_a_movie = function(){
     type: 'GET',
   }).done(function(movie){
     var html = "<ul>";
-    html += "<h2>" + movie.title + "</h2>";
+    html += "<h1>" + movie.title + "</h1>";
     html += '<li> Total Gross: $' + movie.total_gross + "</li>";
     html += '<li> MPAA Rating: ' + movie.mpaa_rating + "</li>";
     html += '<li> Release Date: ' + movie.release_date + "</li>";
@@ -106,15 +106,36 @@ App.submitMovie = function(event){
   });
 };
 
+App.submitReview = function(event){
+  if(event.preventDefault) event.preventDefault();
+  var queryString = window.location.search;
+  queryString = queryString.substring(1);
+  $.ajax({
+    url: App.url + "/movies/" + queryString + "/reviews",
+    type: 'POST',
+    dataType: 'JSON',
+    data: {
+      review: {
+        author: $('#review-author').val(),
+        comment: $('#comment').val(),
+        star_rating: $('#star-rating').val(),
+      }
+    }
+  }).done(function(data){
+    trace(data);
+  }).fail(function(jqXHR, textStatus, errorThrown){
+    trace(jqXHR, textStatus, errorThrown);
+  });
+};
 
 $(document).ready(function(){
   App.getMovies();
-  var $selectedMovie = $('h2#theMovie');
-  $selectedMovie.on('click', function(event){
-    alert("Movie clicked");
-  });
   var $movieForm = $('form#new-movie-form');
   $movieForm.on('submit', function(event){
     App.submitMovie(event);
+  });
+  var $reviewForm = $('form#new-review-form');
+  $reviewForm.on('submit', function(event){
+    App.submitReview(event);
   });
 });

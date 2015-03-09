@@ -27,51 +27,46 @@
 
     <section class="main-content">
       <header id="header" class="">
-        <h1>Movies</h1>
+
       </header>
 
       <div class="show-movie">
       </div>
 
       <div class="forms">
-        <div class="movie-form">
-          <h2>Add a Movie</h2>
-          <form id="new-movie-form">
+        <div class="review-form">
+          <h2>Add a Review</h2>
+          <form id="new-review-form">
             <div class="form-group">
-              <label for="movie-title">Movie Title</label>
-              <input name="movie-title" type="text" placeholder="Movie Title" id='movie-title' />
+              <label for="review-author">Author</label>
+              <input name="review-author" type="text" placeholder="Your Name" id='review-author' />
             </div>
              <div class="form-group">
-              <label for="total-gross">Total Gross</label>
-              <input name="total-gross" type="text" placeholder="Total Gross" id='total-gross' />
+              <label for="comment">Comment</label>
+              <input name="comment" type="text" placeholder="Please enter comment here..." id='comment' />
             </div>
              <div class="form-group">
-              <label for="release-date">Release Date</label>
-              <input name="release-date" type="text" placeholder="Release Date" id='release-date' />
+              <label for="star-rating">Rating(Number of Stars)</label>
+              <input name="star-rating" type="text" placeholder="rate out of 5 stars..." id='star-rating' />
             </div>
             <div class="form-group">
-              <label for="rating">MPAA Rating</label>
-              <input name="rating" type="text" placeholder="MPAA Rating" id='rating' />
-            </div>
-            <div class="form-group">
-              <label for="description">Description</label>
-              <textarea name="description" placeholder="Description" id="description"></textarea>
-            </div>
-            <div class="form-group">
-              <input type="submit" id='submit' value="Add Movie" />
+              <input type="submit" id='submit' value="Add Review" />
             </div>
           </form>
         </div>
 
+
+    <p>Click <a href="http://localhost:9000/">here</a> to go to back to the homepage.</p>
+
     </section>
 
-    <footer>
-      <div class="footer-content">
-        <div class="column1">
-          Created by Brandon Koo, Pat Needham, and Helen Thi
-        </div>
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Created by Brandon Koo, Pat Needham, and Helen Thi</p>
       </div>
     </footer>
+
+
 
     <!-- build:js(.) scripts/oldieshim.js -->
     <!--[if lt IE 9]>
