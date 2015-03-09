@@ -36,18 +36,17 @@ App.render_all_movies = function(movies){
     html += '<li> MPAA Rating: ' + movie.mpaa_rating + "</li>";
     html += '<li> Release Date: ' + movie.release_date + "</li>";
     html += '<li> Description: ' + movie.description + "</li>";
+    html += "<br><h3>Number of Reviews: </h3>";
+
     if (movie.reviews.length > 0){
-      movie.reviews.forEach(function(review){
-      html += "<br><h3>Reviews: </h3>";
-      html += '<li> Author: ' + review.author + "</li>";
-      html += '<li> Comment: ' + review.comment + "</li>";
-      html += '<li> Rating(Number of Stars): ' + review.star_rating + "</li>";
-      html += "<ul>";
-      });
+      html += movie.reviews.length;
+    }
+    else{
+      html += 0;
     };
-     html += '</article>'
+     html += '</article>';
      html += "</ul>";
-     html += '<hr>'
+     html += '<hr>';
      //html += "<input type='submit' id='delete-" + movie.id + "' value='Add Movie' />";
      html += '</div>';
   });
