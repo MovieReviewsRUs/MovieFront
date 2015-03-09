@@ -112,6 +112,7 @@ App.submitReview = function(event){
   queryString = queryString.substring(1);
   $.ajax({
     url: App.url + "/movies/" + queryString + "/reviews",
+    // url: App.url + '/show.html/' + queryString,
     type: 'POST',
     dataType: 'JSON',
     data: {
@@ -123,10 +124,14 @@ App.submitReview = function(event){
     }
   }).done(function(data){
     trace(data);
+    debugger
+    window.location.href = '/';
   }).fail(function(jqXHR, textStatus, errorThrown){
     trace(jqXHR, textStatus, errorThrown);
   });
 };
+
+
 
 $(document).ready(function(){
   App.getMovies();
