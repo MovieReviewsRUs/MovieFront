@@ -24,8 +24,10 @@ App.getMovies = function(){
 
 App.render_all_movies = function(movies){
   var html = "<ul>";
+
   movies.forEach(function(movie){
-    $('.dropdown-menu').append('<li><a href="#">'+ movie.title +'</a></li><li class="divider"></li>');
+    var show_url = "http://localhost:9000/show.html?" + movie.id
+    $('.dropdown-menu').append('<li><a href="' + show_url + '">' + movie.title +'</a></li><li class="divider"></li>');
 
     html += "<div id='movie-" + movie.id + "'>";
     html += '<article>';
@@ -50,14 +52,33 @@ App.render_all_movies = function(movies){
      html += '</div>';
   });
   $('.movies').append(html);
+  App.show_a_movie();
 };
 
-App.show_a_movie = function(movie){
+App.show_a_movie = function(){
+  var queryString = window.location.search;
+  queryString = queryString.substring(1);
   $.ajax({
-    url: App.url + '/movies/#{movie.id}',
+    url: App.url + '/movies/' + queryString,
     type: 'GET',
-  }).done(function(data){
-    trace(data);
+  }).done(function(movie){
+    var html = "<ul>";
+    html += "<h2>" + movie.title + "</h2>";
+    html += '<li> Total Gross: $' + movie.total_gross + "</li>";
+    html += '<li> MPAA Rating: ' + movie.mpaa_rating + "</li>";
+    html += '<li> Release Date: ' + movie.release_date + "</li>";
+    html += '<li> Description: ' + movie.description + "</li>";
+    if (movie.reviews.length > 0){
+      movie.reviews.forEach(function(review){
+      html += "<br><h3>Reviews: </h3>";
+      html += '<li> Author: ' + review.author + "</li>";
+      html += '<li> Comment: ' + review.comment + "</li>";
+      html += '<li> Rating(Number of Stars): ' + review.star_rating + "</li>";
+      html += "<ul>";
+      });
+    };
+    html += "</ul>";
+    $('.show-movie').append(html);
   }).fail(function(jqXHR, textStatus, errorThrown){
     trace(jqXHR, textStatus, errorThrown);
   });
@@ -88,7 +109,6 @@ App.submitMovie = function(event){
 
 $(document).ready(function(){
   App.getMovies();
-  App.show_a_movie();
   var $selectedMovie = $('h2#theMovie');
   $selectedMovie.on('click', function(event){
     alert("Movie clicked");
