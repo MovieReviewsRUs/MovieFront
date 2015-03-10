@@ -51,7 +51,7 @@ var UserApp = (function() {
     })
     .done(loginSuccess)
     .fail(function() {
-      console.log("error");
+      console.log('error');
     });
     return false;
   };
@@ -59,7 +59,7 @@ var UserApp = (function() {
    var setupAjaxRequests = function() {
     $.ajaxPrefilter(function( options ) {
       options.headers = {};
-      options.headers['AUTHORIZATION'] = "Token token=" + authToken;
+      options.headers['AUTHORIZATION'] = 'Token token=' + authToken;
     });
   };
 
