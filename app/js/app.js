@@ -23,13 +23,13 @@ App.getMovies = function(){
 };
 
 App.render_all_movies = function(movies){
-  var html = "<ul>";
+  var html = '<ul>';
 
   movies.forEach(function(movie){
-    var show_url = "http://localhost:9000/show.html?" + movie.id
+    var show_url = 'http://localhost:9000/show.html?' + movie.id
     $('.dropdown-menu').append('<li><a href="' + show_url + '">' + movie.title +'</a></li><li class="divider"></li>');
 
-    html += "<div id='movie-" + movie.id + "'>";
+    html += '<div id="movie-' + movie.id + '">';
     html += '<article>';
     html += "<h2>" + movie.title + "</h2>";
     html += '<li> Total Gross: $' + movie.total_gross + "</li>";
@@ -72,8 +72,8 @@ App.show_a_movie = function(){
       html += "<br><h3>Reviews: </h3>";
       html += '<li> Author: ' + review.author + "</li>";
       html += '<li> Comment: ' + review.comment + "</li>";
-      html += '<li> Rating(Number of Stars): ' + review.star_rating + "</li>";
-      html += "<ul>";
+      html += '<li> Rating (Number of Stars): ' + review.star_rating + "</li>";
+      // html += "<ul>";
       });
     };
     html += "</ul>";
@@ -112,7 +112,6 @@ App.submitReview = function(event){
   $.ajax({
     url: App.url + "/movies/" + queryString + "/reviews",
     type: 'POST',
-    dataType: 'JSON',
     data: {
       review: {
         author: $('#review-author').val(),
